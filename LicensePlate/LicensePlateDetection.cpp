@@ -41,6 +41,11 @@ void LicensePlateDetection::preprocess() {
     cv::imshow("preprocess - 3", this->edges);
 }
 
+/**
+ * Find the best contour candidates to work with later on
+ *
+ * @populates this->contours
+ */
 void LicensePlateDetection::findContours() {
     std::vector<cv::Vec4i> hieararchy;
     cv::findContours(this->edges, this->contours, hieararchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE);
@@ -51,24 +56,29 @@ void LicensePlateDetection::findContours() {
                   return cv::contourArea(c1, false) > cv::contourArea(c2, false);
               });
 
-    // we only need the first 50% of contours
+    // we only need the first 10 contours
     this->contours.resize(10);
 
+    // draw the contours only to show it to the user
     cv::Mat drawing = cv::Mat::zeros(this->edges.size(), CV_8UC1);
     cv::Scalar color = cv::Scalar(255, 255, 255);
     for (size_t i = 0; i < contours.size(); i++) {
         cv::drawContours(drawing, this->contours, (int) i, color, cv::LINE_4, 2, hieararchy, 0);
     }
     cv::imshow("findcontours - 1", drawing);
-
 }
 
+/**
+ * Masks the image with the appropiate contour from this->contours.
+ *
+ * @populates this->masked
+ */
 void LicensePlateDetection::maskImage() {
     // vector storing points of the rectangle-shaped object
     std::vector<cv::Point> approx;
 
-    for (auto c : contours) { // find a contour that is closed and has a rectangle shape, there is room for improvement here
-        int len = cv::arcLength(c, true);
+    for (const auto &c : contours) { // find a contour that is closed and has a rectangle shape, there is room for improvement here
+        int len = (int) cv::arcLength(c, true);
         cv::approxPolyDP(c, approx, len * 0.018, true);
         if (approx.size() == 4) {
             // if a contour has 4 edges and has a rectangle shape, it is safe to assume that we found the license plate itself
@@ -86,6 +96,7 @@ void LicensePlateDetection::maskImage() {
 
 /**
  * Constructor.
+ *
  * @param path the path to the file
  */
 LicensePlateDetection::LicensePlateDetection(const std::string &path) : path(path) {
