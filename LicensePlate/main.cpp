@@ -5,22 +5,28 @@
 //  Created by Geszti Bence on 2020. 11. 18..
 //
 
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgproc.hpp>
-#include <iostream>
+#include "LicensePlateDetection.h"
+#include "Includes.h"
 
 using namespace cv;
+
 void first();
 
-int main(int argc, const char * argv[]) {
-    first();
-    waitKey();
+int main(int argc, const char *argv[]) {
+    std::vector<std::string> files = {
+            "IUK130.jpeg",
+            "SET308.jpeg",
+            "RJE091.jpeg",
+            "HAB423.jpeg",
+    };
+
+    for (auto s : files) {
+        LicensePlateDetection lpd(s);
+        lpd.detect();
+        std::cout << lpd.result() << std::endl;
+        waitKey();
+    }
+
     return 0;
 }
 
-void first() {
-    Mat img = imread("vegita.jpeg");
-    
-    imshow("Vegita", img);
-}
