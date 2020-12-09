@@ -11,8 +11,8 @@
  * @return the license plate as a string
  */
 std::string LicensePlateDetection::result() {
-    cv::imshow("masked", this->masked);
-    cv::Mat im = this->masked;
+    //cv::imshow("masked", this->masked);
+    cv::Mat im = this->cropped;
     tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
     ocr->Init(NULL, "eng", tesseract::OEM_LSTM_ONLY);
     ocr->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
@@ -100,7 +100,11 @@ void LicensePlateDetection::maskImage() {
     cv::Mat mask = cv::Mat::zeros(img.size(), CV_8UC1);
     cv::drawContours(mask, contoursProbable, 0, cv::Scalar(255, 255, 255), -1);
     cv::bitwise_and(img, img, masked, mask);
-    cv::imshow("findcontours - 2", masked);
+
+    cv::Rect boundingRect = cv::boundingRect(contoursProbable[0]);
+    cropped = cv::Mat(masked, boundingRect);
+
+    cv::imshow("findcontours - 2", cropped);
 }
 
 /**

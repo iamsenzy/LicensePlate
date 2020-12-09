@@ -25,6 +25,7 @@ private:
     cv::Mat gray;
     cv::Mat edges;
     cv::Mat masked;
+    cv::Mat cropped;
     std::vector<std::vector<cv::Point>> contours;
 
     void findContours();
