@@ -11,11 +11,20 @@
  * @return the license plate as a string
  */
 std::string LicensePlateDetection::result() {
+    cv::imshow("masked", this->masked);
+    cv::Mat im = this->masked;
+    tesseract::TessBaseAPI *ocr = new tesseract::TessBaseAPI();
+    ocr->Init(NULL, "eng", tesseract::OEM_LSTM_ONLY);
+    ocr->SetPageSegMode(tesseract::PSM_SINGLE_LINE);
+    ocr->SetImage(im.data, im.cols, im.rows, 3, im.step);
+    this->_result = std::string(ocr->GetUTF8Text());
+    ocr->End();
+    
     if (!this->_result.empty()) {
         return this->_result;
     }
-
-    return "There is no result as of yet.";
+    
+    return "There is no result.";
 }
 
 /**

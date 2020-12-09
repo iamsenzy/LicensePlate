@@ -11,5 +11,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <tesseract/baseapi.h>
 
 #endif //LICENSEPLATE_INCLUDES_H

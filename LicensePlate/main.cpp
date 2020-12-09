@@ -14,10 +14,11 @@ void first();
 
 int main(int argc, const char *argv[]) {
     std::vector<std::string> files = {
-            "IUK130.jpeg",
-            "SET308.jpeg",
-            "RJE091.jpeg",
-            "HAB423.jpeg",
+        "IUK130.jpeg",
+        "HAB423.jpeg",
+        "skoda.jpg",
+        "ww.jpg",
+        "bmw.jpg",
     };
 
     for (auto s : files) {

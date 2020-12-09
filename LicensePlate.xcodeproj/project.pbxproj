@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E2954D52565A8FA00C91CA5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E2954D42565A8FA00C91CA5 /* main.cpp */; };
+		5E9632DA25813FBF00AFD052 /* LicensePlateDetection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E9632D625813FBF00AFD052 /* LicensePlateDetection.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,9 @@
 /* Begin PBXFileReference section */
 		5E2954D12565A8FA00C91CA5 /* LicensePlate */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LicensePlate; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E2954D42565A8FA00C91CA5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5E9632D625813FBF00AFD052 /* LicensePlateDetection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LicensePlateDetection.cpp; sourceTree = "<group>"; };
+		5E9632D725813FBF00AFD052 /* Includes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Includes.h; sourceTree = "<group>"; };
+		5E9632D925813FBF00AFD052 /* LicensePlateDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicensePlateDetection.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				5E2954D42565A8FA00C91CA5 /* main.cpp */,
+				5E9632D725813FBF00AFD052 /* Includes.h */,
+				5E9632D625813FBF00AFD052 /* LicensePlateDetection.cpp */,
+				5E9632D925813FBF00AFD052 /* LicensePlateDetection.h */,
 			);
 			path = LicensePlate;
 			sourceTree = "<group>";
@@ -118,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E9632DA25813FBF00AFD052 /* LicensePlateDetection.cpp in Sources */,
 				5E2954D52565A8FA00C91CA5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,10 +250,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2JGWGKUJ7;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "/usr/local/Cellar/opencv/4.5.0_4/include/**";
-				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/opencv/4.5.0_4/lib/**";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv/4.5.0_5/include/**",
+					"/usr/local/Cellar/tesseract/4.1.1/include/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv/4.5.0_5/lib/**",
+					"/usr/local/Cellar/tesseract/4.1.1/lib/**",
+				);
 				OTHER_LDFLAGS = (
-					"-L/usr/local/Cellar/opencv/4.5.0_4/lib",
+					"-L/usr/local/Cellar/opencv/4.5.0_5/lib",
 					"-lopencv_gapi",
 					"-lopencv_stitching",
 					"-lopencv_alphamat",
@@ -300,6 +314,7 @@
 					"-lopencv_photo",
 					"-lopencv_imgproc",
 					"-lopencv_core",
+					"-ltesseract",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -311,10 +326,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H2JGWGKUJ7;
 				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "/usr/local/Cellar/opencv/4.5.0_4/include/**";
-				LIBRARY_SEARCH_PATHS = "/usr/local/Cellar/opencv/4.5.0_4/lib/**";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv/4.5.0_5/include/**",
+					"/usr/local/Cellar/tesseract/4.1.1/include/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/Cellar/opencv/4.5.0_5/lib/**",
+					"/usr/local/Cellar/tesseract/4.1.1/lib/**",
+				);
 				OTHER_LDFLAGS = (
-					"-L/usr/local/Cellar/opencv/4.5.0_4/lib",
+					"-L/usr/local/Cellar/opencv/4.5.0_5/lib",
 					"-lopencv_gapi",
 					"-lopencv_stitching",
 					"-lopencv_alphamat",
@@ -369,6 +390,7 @@
 					"-lopencv_photo",
 					"-lopencv_imgproc",
 					"-lopencv_core",
+					"-ltesseract",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
